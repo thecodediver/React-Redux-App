@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { fetchSetAndRise } from '../store/actions/actionIndex.js';
@@ -19,13 +19,18 @@ import { fetchSetAndRise } from '../store/actions/actionIndex.js';
 
 
 const SetAndRise = props => {
+
+    const [latLng, setLatLng] = useState([0, 0])
+
     let lat = 0
     let lng = 0
 
     const washDCLatLng = () => {
-        lat = (lat * 0) + 38.9072
-        lng = (lng * 0) + 77.0369
-        return [lat, lng]
+        setLatLng([38.9072, 77.0369])
+        
+        // lat += 38.9072
+        // lng += 77.0369
+        // console.log('this is running')
     }
     // const parisLatLng = () => {
     //     lat = (lat * 0) + 48.8566
@@ -37,13 +42,17 @@ const SetAndRise = props => {
 
 
     useEffect(() => {
-        props.fetchSetAndRise(lat, lng);
-    }, []);
+        console.log(latLng)
+
+        props.fetchSetAndRise(latLng[0], latLng[1]);
+    }, [latLng]);
+
     console.log(lat, lng)
+
     return (
             <div>
                 <div className="location-btns">
-                    <button className="washingtonDC" onClick={washDCLatLng()}>Washington D.C.</button>
+                    <button className="washingtonDC" onClick={washDCLatLng}>Washington D.C.</button>
                     <button className="paris" >Paris</button>
                     <button className="istanbul">Istanbul</button>
                     <button className="tokyo">Tokyo</button>
