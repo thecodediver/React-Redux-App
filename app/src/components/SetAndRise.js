@@ -19,25 +19,25 @@ const SetAndRise = props => {
     // from it i need .sunset and .sunrise as well as the country it is in
     // 38.9072, 77.0369
 
-    const [latLng, setLatLng] = useState([38.9072, 77.0369])
+    const [latLng, setLatLng] = useState([38.901871, -77.032806])
 
     const washingtonDCLatLng = () => {
-        setLatLng([38.9072, 77.0369])
+        setLatLng([38.901871, -77.032806])
         console.log('we are not looking at Washington DC')
         document.getElementById('infoContainer').className = "washingtonDCStyles"
     }
     const parisLatLng = () => {
-        setLatLng([48.8566, 2.3522])
+        setLatLng([48.856613, 2.352222])
         console.log('we are not looking at Paris')
         document.getElementById('infoContainer').className = "parisStyles"
     }
     const istanbulLatLng = () => {
-        setLatLng([41.0082, 28.9784])
+        setLatLng([41.008240, 28.978359])
         console.log('we are not looking at Istanbul')
         document.getElementById('infoContainer').className = "istanbulStyles"
     }
     const tokyoLatLng = () => {
-        setLatLng([35.6762, 139.6503])
+        setLatLng([35.689487, 139.691711])
         console.log('we are not looking at Tokyo')
         document.getElementById('infoContainer').className = "tokyoStyles"
     }
