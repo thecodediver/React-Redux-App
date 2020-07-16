@@ -13,55 +13,62 @@ import { fetchSetAndRise } from '../store/actions/actionIndex.js';
 // So i am going to have the site START in washington DC! then have, lets start with 3 buttons to set the sunrise/sunset latitude and longitude to those coordinates
 
 
-
-
-
-
-
 const SetAndRise = props => {
+    console.log('----------------', props.setandrise)
+    // above is the DATA i need
+    // from it i need .sunset and .sunrise as well as the country it is in
+    // 38.9072, 77.0369
 
-    const [latLng, setLatLng] = useState([0, 0])
+    const [latLng, setLatLng] = useState([38.9072, 77.0369])
 
-    let lat = 0
-    let lng = 0
-
-    const washDCLatLng = () => {
+    const washingtonDCLatLng = () => {
         setLatLng([38.9072, 77.0369])
-        
-        // lat += 38.9072
-        // lng += 77.0369
-        // console.log('this is running')
+        console.log('we are not looking at Washington DC')
+        document.getElementById('infoContainer').className = "washingtonDCStyles"
     }
-    // const parisLatLng = () => {
-    //     lat = (lat * 0) + 48.8566
-    //     lng = (lng * 0) + 2.3522
-    // }
-    
+    const parisLatLng = () => {
+        setLatLng([48.8566, 2.3522])
+        console.log('we are not looking at Paris')
+        document.getElementById('infoContainer').className = "parisStyles"
+    }
+    const istanbulLatLng = () => {
+        setLatLng([41.0082, 28.9784])
+        console.log('we are not looking at Istanbul')
+        document.getElementById('infoContainer').className = "istanbulStyles"
+    }
+    const tokyoLatLng = () => {
+        setLatLng([35.6762, 139.6503])
+        console.log('we are not looking at Tokyo')
+        document.getElementById('infoContainer').className = "tokyoStyles"
+    }
 
 
 
 
     useEffect(() => {
-        console.log(latLng)
-
         props.fetchSetAndRise(latLng[0], latLng[1]);
     }, [latLng]);
 
-    console.log(lat, lng)
 
     return (
-            <div>
-                <div className="location-btns">
-                    <button className="washingtonDC" onClick={washDCLatLng}>Washington D.C.</button>
-                    <button className="paris" >Paris</button>
-                    <button className="istanbul">Istanbul</button>
-                    <button className="tokyo">Tokyo</button>
+            <div id="allContainer">
+                <div id="location-btns">
+                    <button id="btn" className="washingtonDC" onClick={washingtonDCLatLng}>Washington D.C.</button>
+                    <button id="btn" className="paris" onClick={parisLatLng}>Paris</button>
+                    <button id="btn" className="istanbul" onClick={istanbulLatLng}>Istanbul</button>
+                    <button id="btn" className="tokyo" onClick={tokyoLatLng}>Tokyo</button>
                 </div>
-
+                <div id="infoContainer" className="washingtonDCStyles">
+                    <div className="props-info">
+                        <p>Sunset Time: {props.setandrise.sunset}</p>
+                        <p>Sunrise Time: {props.setandrise.sunrise}</p>
+                        <p>Day Length: {props.setandrise.day_length}</p>
+                    </div>
+                </div> 
                 {props.isLoading && <h4>Loading Sunset and Sunrise data...</h4>}
-                {props.error && (
-                    <p className="error">Uh Oh, something went wrong.... {props.error}</p>
-                )}                
+                    {props.error && (
+                        <p className="error">Uh Oh, something went wrong.... {props.error}</p>
+                    )}               
             </div>
     )
 }

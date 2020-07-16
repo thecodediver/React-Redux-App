@@ -13,8 +13,7 @@ export const fetchSetAndRise = (lat, lng) => {
 
         axios.get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}`)
             .then(res => {
-                console.log(res.data)
-                dispatch({ type: FETCH_SETANDRISE_SUCCESS, payload: res.data })
+                dispatch({ type: FETCH_SETANDRISE_SUCCESS, payload: res.data.results })
             })
             .catch(err => {
                 dispatch({ type: FETCH_SETANDRISE_FAILURE, payload: err.message })
